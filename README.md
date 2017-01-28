@@ -11,12 +11,15 @@ gca-node final code will be able to be compiled on Mac OS Sierra and Linux with 
   * A built DLL of **[libusb 1.0.21][1]** or higher. It can be built from source on Visual Studio 2015 by opening the solution `libusb_2015.sln` within the `msvc` folder and building the project `libusb1.0 (dll)`. 
     * You can also download a prebuilt DLL from the [libusb repository][2].
   * **ElMassivo's Wii U GCN USB Driver**, either [downloding the latest release][3] or [building it from source][4]. Carefully follow all the instructions to install a new driver for the Wii U GameCube&trade; Adapter so that Windows may correctly configure it.
+  
 ### Build procedure
+
  1. Download or clone the gca-node repository.
- 2. Create two directories within the `initial_tests\LibUSBTest<X>` folder called `lib`, where `<X>` is the number of test you want to try.
- 3. Copy both `libusb-1.0.dll` and `libusb-1.0.lib` you've just built inside the new `lib` folder.
- 4. Open `LibUSBTest<X>.sln` and compile it.
- 5. The program should automatically copy the `libusb-1.0.dll` file within the executable program's folder. If it doesn't, Windows will report that the DLL is missing. You'll have to copy it manually to the folder where the executable is located.
+ 2. Create two directories within the `initial_tests\LibUSBTest<X>` folder called `lib` and `include`, where `<X>` is the number of test you want to try.
+ 3. Copy both `libusb-1.0.dll` and `libusb-1.0.lib` you've just built inside the `lib` folder.
+ 4. Copy the `libusb.h` from the downloaded libusb files to the `include` folder.
+ 5. Open `LibUSBTest<X>.sln` and compile it.
+ 6. The program should automatically copy the `libusb-1.0.dll` file within the executable program's folder. If it doesn't, Windows will report that the DLL is missing. You'll have to copy it manually to the folder where the executable is located.
 
 ### Pre-execution setup
 1. Make sure you've installed **ElMassivo's Wii U GCN USB Driver** and changed the driver of the Wii U GameCube&trade; Adapter to WinUSB.
