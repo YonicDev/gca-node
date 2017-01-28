@@ -3,15 +3,16 @@ gca-node is a NodeJS addon that adds Nintendo&trade; Wii U GameCube&trade; Adapt
 Currently, gca-node is under testing and the final code development has not started.
 
 ## Build guide
-** gca-node's initial_tests only build on Windows Vista and later versions.**
+
+**gca-node's initial_tests only build on Windows Vista and later versions.**
 
 gca-node final code will be able to be compiled on Windows 7 and later versions, OS X 10.8+ and most recent versions of Linux distros.
 
-*Windows XP and Windows Vista are not officially supported by gca-node, but it is possible to build the initial_tests directory by extensively modifying the solution file or installing Windows XP C++ support on Visual Studio.*
+*Windows XP and Windows Vista are not officially supported by gca-node, but it is possible to build the initial_tests directory by installing Windows XP C++ support on Visual Studio 2015.*
 *OS X 10.7 is not supported by gca-node, as well.*
 
 ### Prerequisites
-  * **Visual Studio 2015** with main C++ tools. For Windows Vista
+  * **Visual Studio 2015** with standard C++ tools. **[Windows XP, Windows Vista]**: Windows XP C++ Support must also be installed.
   * A built DLL of **[libusb 1.0.21][1]** or higher. It can be built from source on Visual Studio 2015 by opening the solution `libusb_2015.sln` within the `msvc` folder and building the project `libusb1.0 (dll)`. 
     * You can also download a prebuilt DLL from the [libusb repository][2].
   * **ElMassivo's Wii U GCN USB Driver**, either [downloding the latest release][3] or [building it from source][4]. Carefully follow all the instructions to install a new driver for the Wii U GameCube&trade; Adapter so that Windows may correctly configure it.
