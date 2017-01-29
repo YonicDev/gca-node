@@ -36,4 +36,4 @@ gca-node final code will be able to be compiled on Windows 7 and later versions,
 [2]: https://github.com/libusb/libusb/releases/download/v1.0.21/libusb-1.0.21.tar.bz2
 [3]: https://bitbucket.org/elmassivo/gcn-usb-adapter/downloads/WiiU-UsbSetup%202015-09-02.exe
 [4]: https://bitbucket.org/elmassivo/gcn-usb-adapter/src
-[logo]: http://i.imgur.com/KZqxwio.png
+[logo]: http://i.imgur.com/quWt3jK.png
