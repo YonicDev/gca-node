@@ -24,6 +24,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
+initial_tests/*/build/Release
 build/Release
 
 # Dependency directories
@@ -346,3 +347,6 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
+
+initial_tests/NodeBridgeTest1/build/
+initial_tests/NodeBridgeTest2/build/
