@@ -19,5 +19,5 @@ The build guide can be found at [TESTS.md][1].
 ## Pre-execution setup
 Make sure you've used **Zadig** to change the driver of the Wii U GameCube&trade; Adapter to WinUSB.
 
-[1]: https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.21/libusb-1.0.21.tar.bz2/download
+[1]: https://github.com/yonicstudios/gca-node/blob/tests/TESTS.md
 [logo]: http://i.imgur.com/KZqxwio.png
