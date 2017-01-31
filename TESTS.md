@@ -42,11 +42,11 @@ Except for the first element, all of these elements appear four times in the arr
     * Bit 6: R trigger button
     * Bit 7: Z button
     * Bit 8: START button
-* [Left stick X] represents the horizontal axis of the left stick. It could actually be a short or even a float.
-* [Left stick Y] represents the vertical axis of the left stick. It could actually be a short or even a float.
-* [C stick X] represents the horizontal axis of the C-Stick. It could actually be a short or even a float.
-* [C stick Y] represents the vertical axis of the C-Stick. It could actually be a short or even a float.
-* [L axis] represents the analog input axis of the L trigger. It could be a short.
-* [R axis] represents the analog input axis of the R trigger. It could be a short.
+ * [Left stick X] represents the horizontal axis of the left stick. It could actually be a short or even a float.
+ * [Left stick Y] represents the vertical axis of the left stick. It could actually be a short or even a float.
+ * [C stick X] represents the horizontal axis of the C-Stick. It could actually be a short or even a float.
+ * [C stick Y] represents the vertical axis of the C-Stick. It could actually be a short or even a float.
+ * [L axis] represents the analog input axis of the L trigger. It could be a short.
+ * [R axis] represents the analog input axis of the R trigger. It could be a short.
 
 Rumble data is not obtained from here. Rather, it seems to be a command data.
