@@ -20,7 +20,9 @@ Building NodeBridge tests work pretty much like building addons for Nodejs. On y
 
 ### Raw data info
 The raw data obtained from the Adapter in NodeBridge Test 3 should be an array of chars of length 37. The structure should be the following:
+
 `[Header] [Status] [Buttons1] [Buttons2] [Left stick X] [Left stick Y] [C stick X] [C stick Y] [L axis] [R axis]`
+
 Except for the first element, all of these elements appear four times in the array, one for each port of the adapter, thus one for each controller. 
 (4 controllers * 9 chars + 1 header = 37 elements)
 
