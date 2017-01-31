@@ -4,13 +4,10 @@
 
 #pragma once
 
-namespace GCANode {
+int AddAdapter(libusb_device *dev);
+NAN_METHOD(Load);
+NAN_METHOD(Setup);
+bool IsAccessible(libusb_device *dev);
 
-	void AddAdapter(libusb_device *dev);
-	NAN_METHOD(Load);
-	NAN_METHOD(Setup);
-	bool IsAccessible(libusb_device *dev);
-
-	const uint16_t GAMECUBE_VID = 0x057E;
-	const uint16_t GAMECUBE_PID = 0x0337;
-}
+const uint16_t GAMECUBE_VID = 0x057E;
+const uint16_t GAMECUBE_PID = 0x0337;
