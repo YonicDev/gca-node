@@ -1,7 +1,7 @@
 {
   "name": "gca-node",
-  "version": "0.1.0",
-  "main":"gca.js",
+  "version": "0.1.1",
+  "main": "gca.js",
   "description": "Nintendo® Wii U GameCube™ Adapter native support for Node.js applications.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,7 @@
     "gamedev"
   ],
   "dependencies": {
-      "nan": "^2.5.1"
+    "nan": "^2.5.1"
   },
   "author": "YonicStudios",
   "license": "GPL-3.0",
