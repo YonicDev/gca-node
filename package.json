@@ -1,0 +1,31 @@
+{
+  "name": "gca-node",
+  "version": "0.1.0",
+  "main":"gca.js",
+  "description": "Nintendo® Wii U GameCube™ Adapter native support for Node.js applications.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonicstudios/gca-node.git"
+  },
+  "keywords": [
+    "gamecube",
+    "wiiu",
+    "controller",
+    "adapter",
+    "gamedev"
+  ],
+  "dependencies": {
+      "nan": "^2.5.1"
+  },
+  "author": "YonicStudios",
+  "license": "GPL-3.0",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/yonicstudios/gca-node/issues"
+  },
+  "homepage": "https://github.com/yonicstudios/gca-node#readme"
+}
