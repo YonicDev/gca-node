@@ -1,3 +1,5 @@
 initial_tests/
 build/
 node_modules/
+amd64/
+x86/
