@@ -20,8 +20,9 @@ As of now, it can only be used on NW.js.
  3. Open the CLI inside the repository and execute `node-gyp rebuild`.
 
 ### NW.js
-1. Open the CLI inside your NW.js project, and run the included `configure.bat` file to install the addon.
-2. Whenever you need to use gca-node, use an alias for require so that other NodeJS tools like webpack do not mistake it as a NodeJS module.
+1. Copy the included `configure.bat` to your NW.js project.
+2. Open the CLI inside your NW.js project, and run the `configure.bat` file to install the addon.
+3. Whenever you need to use gca-node, use an alias for require so that other NodeJS tools like webpack do not mistake it as a NodeJS module.
    ```
       var native_require = eval('require');
       gca_node = native_require('gca-node.node')
