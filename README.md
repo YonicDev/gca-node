@@ -4,13 +4,14 @@ gca-node is a NodeJS addon that adds Nintendo&reg; Wii U GameCube&trade; Adapter
 
 ## Usage
 
-**gca-node currently only builds on Windows 7+ 64-bit**, although there is planned support for Linux and Mac OS.
+**gca-node currently only builds on Windows 7+ 64-bit and Linux**, although there is planned support for Linux and Mac OS.
 As of now, it can only be used on NW.js.
 
-### Prerequisites
+### Windows
+
+#### Prerequisites
   * **Visual Studio 2015** with standard C++ tools.
   * **Node 7.5.0** or higher, with npm installed.
-  * **NW.js SDK version.**
   * **Zadig**: You must use it to replace the HID driver installed on Windows for the adapter to a generic WinUSB one.
   
 ### Building
@@ -19,14 +20,48 @@ As of now, it can only be used on NW.js.
  2. Install `node-gyp` globally (`npm install node-gyp -g`)
  3. Open the CLI inside the repository and execute `node-gyp rebuild`.
 
+### Linux
+Tested on Arch Linux and Ubuntu, but it seems to be working for almost any Linux distro with a fairly recent linux kernel.
+
+#### Prereqisites
+When using your system's package manager. Use the specific commands for your distro.
+
+ * **Make**. It can be already installed on your system. If not, install it from your system's package manager.
+ * **libusb-1.0**. You can install it from your system's package manager. If specified, please install the -dev packages.
+ * **Node 7.5.0** or higher, with npm installed.
+
+#### Building
+
+ 1. Download or clone the gca-node repository.
+ 2. Install `node-gyp` globally (`sudo npm install node-gyp -g`)
+ 3. Open the CLI inside the repository and execute `node-gyp rebuild`.
+
+#### Configuration
+Like Windows, Linux distros require some special configuration. Linux fully supports the adapter's built-in drivers, but an udev rule must be added in order to allow access for gca-node.
+
+ 1. Go to `/lib/udev/rules.d/`.
+ 2. Edit `XX-gcadapter.rules`, if there isn't one, create a file with the following `51-gcadapter.rules`.
+
+Here are the contents of the file:
+`SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"`
+
+### test.js
+Once everything has been configured, you may run a test program by running `node test.js`.
+
 ### NW.js
-1. Add `gca-node` to your project's `package.json` dependencies.
-2. Copy the included `configure.bat` to your NW.js project.
-3. Open the CLI inside your NW.js project, and run the `configure.bat` file to install the addon.
-4. **[Tip]:** Whenever you need to use gca-node, use an alias for require so that other NodeJS tools like webpack do not mistake it as a NodeJS module.
+This is common for all operating systems.
+
+1. Download NW.js SDK flavor.
+2. Add `gca-node` to your project's `package.json` dependencies.
+3. Copy the included batch program for your required OS:
+    * **[Windows]:** `configure.bat`
+    * **[Linux]:** `configure.sh`
+4. Open the CLI inside your NW.js project, and run the copied configure file to install the addon.
+5. **[Tip]:** Whenever you need to use gca-node, use an alias for require so that other NodeJS tools like webpack do not mistake it as a NodeJS module.
+
    ```
-      var native_require = eval('require');
-      gca_node = native_require('gca-node.node');
+    var native_require = eval('require');
+    gca_node = native_require('gca-node.node');
    ```
 
 ## gca-node API
@@ -70,7 +105,7 @@ Returns 0 if succesful.
   * **Will gca-node support connection with Game Boy Advance with GBA Link?**
      * No. Unfortunately, the specifications of the adapter make it incompatible with the GBA Link. Even if it were to be compatible, remotely interfacing with the Game Boy Advance is currently impossible.
   * **When will gca-node be cross-platform?**
-     * We expect support in Linux in gca-node 1.4.x.
+     * You can test cross-platforming support on the crossplatform branch, though it is expected to be on the master branch on gca-node 1.4.x.
   * **Will gca-node br available for 32-bit platforms?**
      * gca-node 1.5.x will start experimenting with 32-bit platforms.
   * **Will gca-node support [electron][2] and apm?**
