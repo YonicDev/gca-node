@@ -117,7 +117,7 @@ int AddAdapter(libusb_device *dev) {
 }
 NAN_METHOD(Load) {
     if(info.Length()>0) {
-        Nan::ThrowError("Load() must not have arguments");
+        Nan::ThrowError("Process() must not have arguments");
         return;
     }
 	int payload_size = 0, tmp = 0;
@@ -126,6 +126,10 @@ NAN_METHOD(Load) {
 	info.GetReturnValue().Set(return_value);
 }
 NAN_METHOD(Request) {
+	if (info.Length()>0) {
+		Nan::ThrowError("Load() must not have arguments");
+		return;
+	}
 	adapter_thread_running.Set(true);
 	adapter_thread = thread(Read);
 	auto return_string = PollBytes(controller_payload);
@@ -204,12 +208,79 @@ unsigned int GetNthBit(uint8_t number,int n) {
 	unsigned int bit = (unsigned)(number & (1 << n - 1));
 	return bit >> n-1;
 }
+NAN_METHOD(Process) {
+	if (info.Length()>0) {
+		Nan::ThrowError("Process() must not have arguments");
+		return;
+	}
+	adapter_thread_running.Set(true);
+	adapter_thread = thread(Read);
+	Nan::HandleScope arr_scope;
+	v8::Handle<v8::Array> arr = Nan::New<v8::Array>();
+	for (int i = 0; i < 4; i++) {
+		arr->Set(i,GetGamepadStatus(controller_payload, i+1));
+	}
+	info.GetReturnValue().Set(arr);
+}
+NAN_METHOD(RawData) {
+	if (info.Length()>0) {
+		Nan::ThrowError("RawData() must not have arguments");
+		return;
+	}
+	adapter_thread_running.Set(true);
+	adapter_thread = thread(Read);
+	stringstream return_value;
+	return_value << "[";
+	for (int i = 0; i < 10; i++) {
+		return_value << bitset<8>(controller_payload[i]) << ",";
+	}
+	return_value << bitset<8>(controller_payload[10]) << "]";
+	auto chain = Nan::New<v8::String>(return_value.str()).ToLocalChecked();
+	info.GetReturnValue().Set(chain);
+}
+
+v8::Local<v8::Object> GetGamepadStatus(uint8_t * results, int port)
+{
+	using namespace v8;
+	using namespace Nan;
+	Local<Object> status = New<Object>();
+
+	status->Set(New<String>("connected").ToLocalChecked(), New<Boolean>(GetNthBit(results[1 * port], 5)));
+
+	status->Set(New<String>("buttonA").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 1)));
+	status->Set(New<String>("buttonB").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 2)));
+	status->Set(New<String>("buttonX").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 3)));
+	status->Set(New<String>("buttonY").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 4)));
+
+	status->Set(New<String>("padLeft").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 5)));
+	status->Set(New<String>("padRight").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 6)));
+	status->Set(New<String>("padDown").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 7)));
+	status->Set(New<String>("padUp").ToLocalChecked(), New<Boolean>(GetNthBit(results[2 * port], 8)));
+
+	status->Set(New<String>("buttonL").ToLocalChecked(), New<Boolean>(GetNthBit(results[3 * port], 4)));
+	status->Set(New<String>("buttonR").ToLocalChecked(), New<Boolean>(GetNthBit(results[3 * port], 3)));
+	status->Set(New<String>("buttonZ").ToLocalChecked(), New<Boolean>(GetNthBit(results[3 * port], 2)));
+	status->Set(New<String>("buttonStart").ToLocalChecked(), New<Boolean>(GetNthBit(results[3 * port], 1)));
+
+	status->Set(New<String>("mainStickHorizontal").ToLocalChecked(), New<Number>(results[4 * port]/128.0 - 1));
+	status->Set(New<String>("mainVertical").ToLocalChecked(), New<Number>(results[5 * port]/128.0 - 1));
+
+	status->Set(New<String>("cStickHorizontal").ToLocalChecked(), New<Number>(results[6 * port]/128.0 -1));
+	status->Set(New<String>("cStickVertical").ToLocalChecked(), New<Number>(results[7 * port]/128.0 -1));
+
+	status->Set(New<String>("triggerL").ToLocalChecked(), New<Number>(results[8 * port]/256.0));
+	status->Set(New<String>("triggerR").ToLocalChecked(), New<Number>(results[9 * port]/256.0));
+
+	return status;
+}
 
 NAN_MODULE_INIT(Bridge) {
     NAN_EXPORT(target,Load);
     NAN_EXPORT(target,Setup);
 	NAN_EXPORT(target,Request);
+	NAN_EXPORT(target, Process);
 	NAN_EXPORT(target, Stop);
+	NAN_EXPORT(target, RawData);
 }
 
-NODE_MODULE(BridgeTest_2,Bridge)
+NODE_MODULE(gca_node,Bridge)
