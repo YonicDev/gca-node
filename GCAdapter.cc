@@ -263,7 +263,7 @@ v8::Local<v8::Object> GetGamepadStatus(uint8_t * results, int port)
 	status->Set(New<String>("buttonStart").ToLocalChecked(), New<Boolean>(GetNthBit(results[3 * port], 1)));
 
 	status->Set(New<String>("mainStickHorizontal").ToLocalChecked(), New<Number>(results[4 * port]/128.0 - 1));
-	status->Set(New<String>("mainVertical").ToLocalChecked(), New<Number>(results[5 * port]/128.0 - 1));
+	status->Set(New<String>("mainStickVertical").ToLocalChecked(), New<Number>(results[5 * port]/128.0 - 1));
 
 	status->Set(New<String>("cStickHorizontal").ToLocalChecked(), New<Number>(results[6 * port]/128.0 -1));
 	status->Set(New<String>("cStickVertical").ToLocalChecked(), New<Number>(results[7 * port]/128.0 -1));
