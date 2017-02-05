@@ -132,9 +132,12 @@ NAN_METHOD(Request) {
 	}
 	adapter_thread_running.Set(true);
 	adapter_thread = thread(Read);
+	if (adapter_thread_running.TestAndClear()) {
+		adapter_thread.join();
+	}
 	auto return_string = PollBytes(controller_payload);
 	auto return_value = Nan::New<v8::String>(return_string).ToLocalChecked();
-	
+
 	info.GetReturnValue().Set(return_value);
 }
 NAN_METHOD(Stop) {
@@ -215,6 +218,9 @@ NAN_METHOD(Process) {
 	}
 	adapter_thread_running.Set(true);
 	adapter_thread = thread(Read);
+	if (adapter_thread_running.TestAndClear()) {
+		adapter_thread.join();
+	}
 	Nan::HandleScope arr_scope;
 	v8::Handle<v8::Array> arr = Nan::New<v8::Array>();
 	for (int i = 0; i < 4; i++) {
@@ -229,6 +235,9 @@ NAN_METHOD(RawData) {
 	}
 	adapter_thread_running.Set(true);
 	adapter_thread = thread(Read);
+	if (adapter_thread_running.TestAndClear()) {
+		adapter_thread.join();
+	}
 	stringstream return_value;
 	return_value << "[";
 	for (int i = 0; i < 10; i++) {
