@@ -2,4 +2,5 @@ language: node_js
 node_js:
     - "node"
 before_install:
-    - apt-get install libusb
+    - sudo apt-get install libusb
+sudo: required
