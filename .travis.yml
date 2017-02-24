@@ -3,6 +3,7 @@ node_js:
     - "node"
 before_install:
     - sudo apt-get install libusb-dev
+    - export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/travis/libusb/1.0.20/lib/pkgconfig"
 sudo: required
 os:
     - linux
