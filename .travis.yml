@@ -8,3 +8,5 @@ sudo: required
 os:
     - linux
     - osx
+notifications:
+    email: false
