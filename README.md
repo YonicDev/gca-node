@@ -1,5 +1,7 @@
 ![gca-node logo][logo]
 
+**IMPORTANT NOTICE: gca-node is no longer officially being developed. Use [gca-js](https://github.com/YonicDev/gca-js) instead.**
+
 gca-node is a NodeJS addon that adds Nintendo&reg; Wii U GameCube&trade; Adapter native support for NodeJS applications.
 
 ## Usage
